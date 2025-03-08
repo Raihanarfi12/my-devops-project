@@ -3,6 +3,8 @@
 # Navigate to project directory
 cd /var/www/html
 
+# Install dependencies
+composer install --no-dev --optimize-autoloader
 # Ensure Composer dependencies are installed
 composer update
 
