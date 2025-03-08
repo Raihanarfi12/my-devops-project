@@ -12,11 +12,6 @@ composer update
 # Copy environment file if not exists
 cp .env.example .env
 
-until mysql -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "SELECT 1"; do
-  echo "Waiting for MySQL..."
-  sleep 3
-done
-
 # Generate application key
 php artisan key:generate
 
