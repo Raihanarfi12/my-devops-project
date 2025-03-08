@@ -4,6 +4,7 @@
 cd /var/www/html
 
 # Install dependencies
+composer config --no-plugins allow-plugins.kylekatarnls/update-helper true
 composer install --no-dev --optimize-autoloader
 # Ensure Composer dependencies are installed
 composer update
