@@ -3,6 +3,9 @@
 # Navigate to project directory
 cd /var/www/html
 
+# Clear Composer cache
+composer clear-cache
+
 # Ensure Composer dependencies are installed
 composer update
 
