@@ -12,20 +12,26 @@ composer update
 # Copy environment file if not exists
 cp .env.example .env
 
-#until mysql -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" -e "SELECT 1"; do
-#  echo "Waiting for MySQL..."
-#  sleep 3
-#done
-sleep 10
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | xargs)
+fi
+
+echo "Waiting for database connection at $DB_HOST..."
+
+# Wait for MySQL to be ready
+until mysqladmin ping -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" --silent; do
+    echo "Waiting for database..."
+    sleep 5
+done
 
 # Generate application key
 php artisan key:generate
 
 # Set up the database
-php artisan migrate --force
-php artisan db:seed --force
 php artisan config:clear
 php artisan config:cache
+php artisan migrate --force
+php artisan db:seed --force
 
 # Start Apache
 apache2-foreground
