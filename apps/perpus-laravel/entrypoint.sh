@@ -12,10 +12,6 @@ composer update
 # Copy environment file if not exists
 cp .env.example .env
 
-if [ -f .env ]; then
-    export $(grep -v '^#' .env | xargs)
-fi
-
 echo "Waiting for database connection at $DB_HOST..."
 
 sleep 90
