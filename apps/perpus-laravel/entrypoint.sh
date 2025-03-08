@@ -18,6 +18,9 @@ php artisan key:generate
 # Set up the database
 php artisan migrate --force
 php artisan db:seed --force
+php artisan config:clear
+php artisan config:cache
+
 
 # Start Apache
 apache2-foreground
