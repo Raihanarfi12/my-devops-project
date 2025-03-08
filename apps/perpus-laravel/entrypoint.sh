@@ -18,11 +18,7 @@ fi
 
 echo "Waiting for database connection at $DB_HOST..."
 
-# Wait for MySQL to be ready
-until mysqladmin ping -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" --silent; do
-    echo "Waiting for database..."
-    sleep 5
-done
+sleep 90
 
 # Generate application key
 php artisan key:generate
