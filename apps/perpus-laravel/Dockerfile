@@ -22,7 +22,7 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /et
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 775 /var/www/html
 
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
