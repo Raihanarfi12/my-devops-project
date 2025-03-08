@@ -24,6 +24,7 @@ services:
   db:
     image: mysql:5.7
     restart: always
+    container_name: perpus_db
     environment:
       MYSQL_DATABASE: 'perpusku_gc'
       MYSQL_USER: 'homestead'
