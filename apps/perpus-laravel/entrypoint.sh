@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to project directory
-cd /var/www/html/perpus
+cd /var/www/html
 
 # Ensure Composer dependencies are installed
 composer update
