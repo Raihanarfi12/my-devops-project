@@ -16,6 +16,7 @@ cp .env.example .env
 #  echo "Waiting for MySQL..."
 #  sleep 3
 #done
+sleep 10
 
 # Generate application key
 php artisan key:generate

@@ -7,3 +7,10 @@ docker compose restart
 
 docker compose down -v
 docker compose up --build -d
+
+#If find connection refused to DB
+docker exec -it perpus_app php artisan config:clear
+docker exec -it perpus_app php artisan config:cache
+docker compose restart
+docker exec -it perpus_app php artisan migrate --force
+

@@ -11,7 +11,8 @@ services:
     volumes:
       - ./apps/perpus-laravel:/var/www/html
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "8080:80"
     networks:
@@ -34,6 +35,11 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - perpus_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
 
 networks:
   perpus_network:
