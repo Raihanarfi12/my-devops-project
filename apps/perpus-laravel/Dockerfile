@@ -5,7 +5,7 @@ WORKDIR /var/www/html
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    zip unzip curl git libpng-dev libjpeg-dev libfreetype6-dev libonig-dev \
+    zip unzip curl git libpng-dev libjpeg-dev libfreetype6-dev libonig-dev default-mysql-client \
     && docker-php-ext-install mbstring gd pdo pdo_mysql
 
 # Install Composer
