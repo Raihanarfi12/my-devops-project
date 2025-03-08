@@ -3,16 +3,11 @@
 # Navigate to project directory
 cd /var/www/html
 
-# Install dependencies
-composer config --no-plugins allow-plugins.kylekatarnls/update-helper true
-composer install --no-dev --optimize-autoloader
 # Ensure Composer dependencies are installed
 composer update
 
 # Copy environment file if not exists
-if [ ! -f .env ]; then
-    cp .env.example .env
-fi
+cp .env.example .env
 
 # Generate application key
 php artisan key:generate
