@@ -1,0 +1,1 @@
+Dont forget to remove volume also with docker compose -v
