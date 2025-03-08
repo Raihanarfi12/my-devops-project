@@ -17,6 +17,9 @@ RUN a2enmod rewrite
 # Copy application files
 COPY . .
 
+# Set Apache Document Root to Laravel's public directory
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
