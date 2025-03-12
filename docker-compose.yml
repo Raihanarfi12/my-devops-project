@@ -33,7 +33,7 @@ services:
     ports:
       - "8080:80"
     networks:
-      - monitoring
+      - perpus_network
   
   prometheus:
     build: ./prometheus  # Build Prometheus from Dockerfile
