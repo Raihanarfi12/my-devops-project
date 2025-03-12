@@ -47,8 +47,8 @@ services:
       - monitoring
       - perpus_network
     depends_on:
-      - perpus_app
-      - perpus_db
+      - app
+      - db
   
   node_exporter:
     image: prom/node-exporter:latest
