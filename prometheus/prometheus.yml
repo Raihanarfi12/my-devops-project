@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["alertmanager:9093"]
+
+rule_files:
+  - /etc/prometheus/alerts.yml  # Load alert rules
+
+scrape_configs:
+  - job_name: "perpus_app"
+    static_configs:
+      - targets: ["perpus_app:8080"]  # Updated port
+
+  - job_name: "perpus_db"
+    static_configs:
+      - targets: ["perpus_db:3306"]

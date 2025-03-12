@@ -1,0 +1,21 @@
+groups:
+  - name: perpus_alerts
+    interval: 30s  # Check every 30 seconds
+    rules:
+      - alert: PerpusAppDown
+        expr: up{instance="perpus_app:8080"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Perpus App Down"
+          description: "The Perpus App instance ({{ $labels.instance }}) has been down for more than 2 minutes."
+
+      - alert: PerpusDBDown
+        expr: up{instance="perpus_db:3306"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Perpus Database Down"
+          description: "The Perpus Database ({{ $labels.instance }}) has been down for more than 2 minutes."
