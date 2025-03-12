@@ -17,7 +17,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - perpus_network
+      perpus_network:
+        aliases:
+          - perpus_db
 
   app:
     build:
@@ -33,7 +35,9 @@ services:
     ports:
       - "8080:80"
     networks:
-      - perpus_network
+      perpus_network:
+        aliases:
+          - perpus_app
   
   prometheus:
     build:
@@ -51,8 +55,11 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
     networks:
-      - monitoring
-      - perpus_network
+      monitoring:
+      perpus_network:
+        aliases:
+          - prometheus
+
     depends_on:
       - app
       - db
