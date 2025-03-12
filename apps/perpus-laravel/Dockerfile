@@ -1,3 +1,4 @@
+# Use official PHP with Apache
 FROM php:7.2-apache
 
 # Set working directory
@@ -22,7 +23,9 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /et
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html
+    && chmod -R 775 /var/www/html \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
