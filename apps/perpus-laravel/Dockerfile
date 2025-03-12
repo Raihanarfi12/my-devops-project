@@ -22,10 +22,8 @@ COPY . .
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 
 # Set proper permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/* \
+    && chmod -R 775 /var/www/html/*
 
 # Copy entrypoint script
 COPY entrypoint.sh /entrypoint.sh
