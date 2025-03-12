@@ -19,7 +19,7 @@ services:
     networks:
       perpus_network:
         aliases:
-          - perpus_db
+          - perpus_db.local
 
   app:
     build:
@@ -37,7 +37,7 @@ services:
     networks:
       perpus_network:
         aliases:
-          - perpus_app
+          - perpus_app.local
   
   prometheus:
     build:
@@ -58,7 +58,7 @@ services:
       monitoring:
       perpus_network:
         aliases:
-          - prometheus
+          - prometheus.local
 
     depends_on:
       - app
