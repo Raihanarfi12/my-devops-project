@@ -36,7 +36,9 @@ services:
       - perpus_network
   
   prometheus:
-    build: ./prometheus  # Build Prometheus from Dockerfile
+    build:
+      context: ./prometheus  # Points to the Laravel directory
+      dockerfile: Dockerfile
     container_name: prometheus
     restart: unless-stopped
     ports:
