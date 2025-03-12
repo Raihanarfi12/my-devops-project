@@ -5,9 +5,7 @@ FROM prom/prometheus:latest
 WORKDIR /etc/prometheus
 
 # Copy Prometheus configuration file
-COPY prometheus.yml /etc/prometheus/prometheus.yml
-COPY alerts.yml /etc/prometheus/alerts.yml  # Optional: Alert rules
-
+COPY . .
 # Expose Prometheus default port
 EXPOSE 9090
 
