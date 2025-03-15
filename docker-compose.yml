@@ -105,7 +105,9 @@ services:
       - monitoring
   
   jenkins:
-    image: jenkins-https
+    build:
+      context: ./jenkins  # Points to the Laravel directory
+      dockerfile: Dockerfile
     ports:
       - "443:8443"
       - "50000:50000"
