@@ -85,6 +85,8 @@ services:
     ports:
       - "9095:8080"  # Changed from 8080:8080 to your custom port
     privileged: true
+    networks:
+      - perpus_network
 
   grafana:
     build: ./grafana
