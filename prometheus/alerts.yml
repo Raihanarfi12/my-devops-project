@@ -1,32 +1,11 @@
 groups:
-  - name: perpus_alerts
+  - name: container_down
     rules:
-      # Alert for container down (not running)
-      - alert: ContainerDown
-        expr: absent(container_start_time_seconds{name="perpus_app"}) or absent(container_start_time_seconds{name="perpus_db"})
-        for: 30s
+      - alert: "ContainerDown"
+        expr: up{job="cadvisor"} == 0
+        for: 2m
         labels:
           severity: critical
         annotations:
           summary: "Container {{ $labels.name }} is down"
-          description: "Container {{ $labels.name }} has been down for more than 30 seconds."
-      
-      # Alert for high CPU usage
-      - alert: HighCpuUsage
-        expr: sum by(name) (rate(container_cpu_usage_seconds_total{name=~"perpus_app|perpus_db"}[1m])) > 0.8
-        for: 2m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High CPU usage on {{ $labels.name }}"
-          description: "Container {{ $labels.name }} has been using more than 80% CPU for 2 minutes."
-      
-      # Alert for high memory usage
-      - alert: HighMemoryUsage
-        expr: container_memory_usage_bytes{name=~"perpus_app|perpus_db"} / container_spec_memory_limit_bytes{name=~"perpus_app|perpus_db"} > 0.8
-        for: 2m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High memory usage on {{ $labels.name }}"
-          description: "Container {{ $labels.name }} has been using more than 80% of its memory limit for 2 minutes."
+          description: "The container {{ $labels.name }} has been down for more than 2 minutes."
