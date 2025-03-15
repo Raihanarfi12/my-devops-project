@@ -59,10 +59,6 @@ services:
       perpus_network:
         aliases:
           - prometheus.local
-
-    depends_on:
-      - app
-      - db
   
   node_exporter:
     image: prom/node-exporter:latest
@@ -101,8 +97,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=custom_password
     networks:
       - monitoring
-    depends_on:
-      - prometheus
 
 networks:
   perpus_network:
