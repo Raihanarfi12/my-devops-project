@@ -121,7 +121,7 @@ services:
       --httpPort=-1
       --httpsPort=8443
       --httpsKeyStore=/var/jenkins_home/jenkins_keystore.jks
-      --httpsKeyStorePassword=mypassword
+      --httpsKeyStorePassword=${KEYSTORE_PASSWORD}
     networks:
       - perpus_network
 
