@@ -12,8 +12,6 @@ composer update
 # Copy environment file if not exists
 cp .env.example .env
 
-sleep 90
-
 # Generate application key
 php artisan key:generate
 

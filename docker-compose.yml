@@ -20,6 +20,11 @@ services:
       perpus_network:
         aliases:
           - perpus_db.local
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost","-psecret"]
+      interval: 15s
+      retries: 6
+      timeout: 5s
 
   app:
     build:
@@ -31,7 +36,8 @@ services:
     #volumes:
     #  - ./apps/perpus-laravel:/var/www/html #comment for avoid overwrite of permission of file
     depends_on:
-      - db
+      perpus_db:
+        condition: service_healthy
     ports:
       - "8080:80"
     networks:
