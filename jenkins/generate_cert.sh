@@ -1,11 +1,20 @@
 #!/bin/bash
 
-# Load environment variables from the .env file
-if [ -f .env ]; then
-  export $(cat .env | grep -v '^#' | xargs)
+# Set working directory
+cd /var/jenkins_home
+
+# Check if keystore already exists
+if [ -f "jenkins_keystore.jks" ]; then
+  echo "Keystore already exists, skipping generation."
+  exit 0
 fi
 
-# Ensure that FQDN and STOREPASS are provided in the .env file
+# Load environment variables
+if [ -f /var/jenkins_home/.env ]; then
+  export $(cat /var/jenkins_home/.env | grep -v '^#' | xargs)
+fi
+
+# Ensure FQDN and KEYSTORE_PASSWORD are set
 if [ -z "$FQDN" ]; then
   echo "FQDN is not specified in the .env file."
   exit 1
@@ -16,16 +25,12 @@ if [ -z "$KEYSTORE_PASSWORD" ]; then
   exit 1
 fi
 
-# Other parameters for the keystore generation
-KEYALGO="RSA"
-ALIAS="selfsigned"
-KEYSIZE=4096
-KEYSTORE="jenkins_keystore.jks"
+# Generate keystore
+keytool -genkey -keyalg RSA -alias selfsigned -keystore jenkins_keystore.jks \
+  -storepass "$KEYSTORE_PASSWORD" -keysize 4096 -dname "CN=$FQDN, OU=DevOps, O=YourOrganization, L=YourCity, ST=YourState, C=US"
 
-# Run the keytool command to generate the keystore with the specified CN (FQDN)
-keytool -genkey -keyalg $KEYALGO -alias $ALIAS -keystore $KEYSTORE -storepass $KEYSTORE_PASSWORD -keysize $KEYSIZE \
-  -dname "CN=$FQDN, OU=DevOps, O=YourOrganization, L=YourCity, ST=YourState, C=US"
+# Set permissions
+chown jenkins:jenkins jenkins_keystore.jks
+chmod 600 jenkins_keystore.jks
 
-# Output result
-echo "Keystore $KEYSTORE created with CN=$FQDN"
-
+echo "Keystore jenkins_keystore.jks created successfully."

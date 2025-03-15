@@ -113,8 +113,6 @@ services:
     ports:
       - "443:8443"
       - "50000:50000"
-    environment:
-      - KEYSTORE_PASSWORD=${KEYSTORE_PASSWORD}
     volumes:
       - jenkins_home:/var/jenkins_home
       - /usr/bin/docker:/usr/bin/docker
