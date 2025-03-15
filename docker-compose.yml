@@ -103,6 +103,23 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=custom_password
     networks:
       - monitoring
+  
+  jenkins:
+    image: jenkins-https
+    ports:
+      - "443:8443"
+      - "50000:50000"
+    environment:
+      - KEYSTORE_PASSWORD=mypassword
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /usr/bin/docker:/usr/bin/docker
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: >
+      --httpPort=-1
+      --httpsPort=8443
+      --httpsKeyStore=/var/jenkins_home/jenkins_keystore.jks
+      --httpsKeyStorePassword=$KEYSTORE_PASSWORD
 
 networks:
   perpus_network:
@@ -112,3 +129,4 @@ volumes:
   mysql_data:
   grafana-data:
   prometheus-data:
+  jenkins_home:
