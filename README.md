@@ -1,9 +1,10 @@
 # URL Shortener
 
 ## Tech Stack
-- Web service : Flask
-- Caching service : redis
+- Web service : Perpus App (Clone from https://github.com/bta-adinusa/perpus-laravel)
 - Database : Postgresql
-- Build : Jenkins
 - Monitoring : Grafana and Prometheus
+
+Coming Soon :
 - Security scanning : Sonarqube
+- Build : Jenkins
