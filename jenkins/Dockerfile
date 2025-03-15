@@ -11,7 +11,7 @@ RUN chmod +x /generate_cert.sh
 RUN /generate_cert.sh
 
 # Copy the generated keystore to the correct location
-COPY /jenkins_keystore.jks /var/jenkins_home/jenkins_keystore.jks
+COPY . .
 
 # Set proper permissions
 RUN chown jenkins:jenkins /var/jenkins_home/jenkins_keystore.jks && chmod 600 /var/jenkins_home/jenkins_keystore.jks
