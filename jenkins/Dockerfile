@@ -8,7 +8,7 @@ COPY generate_cert.sh /generate_cert.sh
 RUN chmod +x /generate_cert.sh
 
 # Ensure the keystore is generated at runtime
-ENTRYPOINT ["/generate_cert.sh"]
+RUN ./generate_cert.sh
 
 # Switch back to Jenkins user
 USER jenkins
