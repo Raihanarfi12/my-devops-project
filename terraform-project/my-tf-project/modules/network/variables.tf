@@ -6,38 +6,44 @@ variable "subnets" {
   type = map(object({
     cidr_block = string
     availability_zone = string
-    is_map_public_ip_on_launch = bool
+    type = string
   }))
   default = {
     "my-pub-subnet-1" = {
         cidr_block = "10.0.1.0/24"
         availability_zone = "us-east-1a"
-        is_map_public_ip_on_launch = true   
+        type = "public"
     }
     "my-pub-subnet-2" = {
         cidr_block = "10.0.2.0/24"
         availability_zone = "us-east-1b"
-        is_map_public_ip_on_launch = false   
+        type = "public"   
     }
     "my-priv-subnet-1" = {
         cidr_block = "10.0.3.0/24"
         availability_zone = "us-east-1a"
-        is_map_public_ip_on_launch = false
+        type = "private"
     }
     "my-priv-subnet-2" = {
         cidr_block = "10.0.4.0/24"
         availability_zone = "us-east-1b"
-        is_map_public_ip_on_launch = false
+        type = "private"
     }
     "db-subnet-1" = {
         cidr_block = "10.0.5.0/24"
         availability_zone = "us-east-1a"
-        is_map_public_ip_on_launch = false
+        type = "private"
     }
     "db-subnet-2" = {
         cidr_block = "10.0.6.0/24"
         availability_zone = "us-east-1b"
-        is_map_public_ip_on_launch = false
+        type = "private"
     }
+  }
+  validation {
+    condition = alltrue([
+      for subnet in values(var.subnets) : subnet.type == "private" || subnet.type == "public"
+    ])
+    error_message = "Each subnet must have type 'private' or 'public'."
   }
 }
