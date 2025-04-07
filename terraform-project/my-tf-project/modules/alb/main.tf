@@ -9,7 +9,7 @@ resource "aws_lb" "my-lb" {
 
   access_logs {
     bucket  = aws_s3_bucket.lb_logs.id
-    prefix  = "test-lb"
+    prefix  = "alb-logs"
     enabled = var.is_log_enabled
   }
 
