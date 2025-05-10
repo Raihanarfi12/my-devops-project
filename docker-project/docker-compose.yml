@@ -1,6 +1,19 @@
 version: "3.8"
 
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+      - "8443:8443"
+      - "50000:50000"
+      - "3000:3000"
+    networks:
+      - monitoring
+      - perpus_app
   db:
     image: mysql:5.7
     restart: always
