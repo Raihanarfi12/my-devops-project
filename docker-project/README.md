@@ -8,3 +8,4 @@
 Coming Soon :
 - Security scanning : Sonarqube
 - Build : Jenkins
+- Nginx : proxy
