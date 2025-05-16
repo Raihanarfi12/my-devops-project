@@ -52,8 +52,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "8080:80"
+    #ports:
+    #  - "8080:80"
     networks:
       perpus_network:
         aliases:
