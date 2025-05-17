@@ -115,23 +115,13 @@ services:
       - monitoring
   
   jenkins:
-    build:
-      context: ./jenkins
-      dockerfile: Dockerfile
-    container_name : jenkins
-    env_file: ./jenkins/.env
-    #ports:
-    #  - "8443:8443"
-    #  - "50000:50000"
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /usr/bin/docker:/usr/bin/docker
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: >
-      --httpPort=-1
-      --httpsPort=8443
-      --httpsKeyStore=/var/jenkins_home/jenkins_keystore.jks
-      --httpsKeyStorePassword=mypassword
     networks:
       - perpus_network
 
