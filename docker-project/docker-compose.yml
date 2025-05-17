@@ -55,9 +55,7 @@ services:
     #ports:
     #  - "8080:80"
     networks:
-      perpus_network:
-        aliases:
-          - perpus_app.local
+      - perpus_network
   
   prometheus:
     build:
@@ -75,10 +73,9 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
     networks:
-      monitoring:
-      perpus_network:
-        aliases:
-          - prometheus.local
+      - monitoring
+      - perpus_network
+      
   
   node_exporter:
     image: prom/node-exporter:latest
