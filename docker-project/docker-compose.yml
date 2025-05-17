@@ -110,6 +110,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=custom_admin
       - GF_SECURITY_ADMIN_PASSWORD=custom_password
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana/
     networks:
       - monitoring
   
