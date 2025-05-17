@@ -10,7 +10,7 @@ services:
       - "443:443"
     networks:
       - monitoring
-      - perpus_app
+      - perpus_network
     depends_on:
       - app
       - jenkins
