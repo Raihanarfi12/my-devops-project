@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'development', url: 'https://github.com/Raihanarfi12/jenkins-repo.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }
+
+        stage('Unit Testing') {
+            steps {
+                sh 'python3 test.py'
+            }
+        }
+    }
+
+    post {
+        failure {
+            emailext (
+                to: 'your@email.com',
+                subject: "❌ Jenkins Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """\
+                    Build failed.
+
+                    Project: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    Build URL: ${env.BUILD_URL}
+                    """
+            )
+        }
+
+        success {
+            emailext (
+                to: 'your@email.com',
+                subject: "✅ Jenkins Build Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """\
+                    Build succeeded!
+
+                    Project: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    Build URL: ${env.BUILD_URL}
+                    """
+            )
+        }
+    }
+}
