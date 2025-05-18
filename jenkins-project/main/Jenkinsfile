@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        DOCKER_IMAGE = "raihanarfix5/simpleresume-py"
+        TARGET_HOST = "10.10.10.77"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Raihanarfi12/jenkins-repo.git'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    def version = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    env.VERSION = version 
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${VERSION}")
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-creds') {
+                        dockerImage.push("${VERSION}")
+                    }
+                }
+            }
+        }
+        
+        stage('Deploy to Remote VM') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'ssh-creds', usernameVariable: 'SSH_USER', passwordVariable: 'SSH_PASS')]) {
+                        sh """
+                        sshpass -p "$SSH_PASS" ssh -o StrictHostKeyChecking=no $SSH_USER@$TARGET_HOST '
+                            sudo docker stop simpleresume || true &&
+                            sudo docker rm simpleresume || true &&
+                            sudo docker run -d --name simpleresume -p 80:5000 raihanarfix5/simpleresume-py:${VERSION}
+                        '
+                        """
+                }
+            }
+        }
+    }
+}
