@@ -48,7 +48,7 @@ This Jenkins project automates the build and deployment process of a Python appl
 
 Each Jenkins pipeline is set up to be triggered via:
 - **SCM polling** or 
-- **GitHub webhook** (recommended)
+- **GitHub webhook** (recommended) --> If we have public endpoint or domain for Jenkins
 
 ---
 
