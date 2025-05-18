@@ -1,11 +1,9 @@
-# URL Shortener
-
+# Simple DevOps Architecture with Docker Compose
+![Architecture](architecture.png)
 ## Tech Stack
 - Web service : Perpus App (Clone from https://github.com/bta-adinusa/perpus-laravel)
 - Database : Postgresql
 - Monitoring : Grafana and Prometheus
-
-Coming Soon :
-- Security scanning : Sonarqube
-- Build : Jenkins
-- Nginx : proxy
+- Proxy : Nginx
+- CI/CD : Jenkins
+- SCA : Sonarqube
