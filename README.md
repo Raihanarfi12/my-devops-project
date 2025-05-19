@@ -26,3 +26,27 @@ Component :
 - RDS
 - S3
 
+## 📦 Project 3: CI/CD Pipeline with Jenkins
+###🔧 Description
+This project demonstrates a complete CI/CD pipeline setup using Jenkins for a Python application, highlighting automation in testing, Docker image creation, and deployment workflows.
+
+###🔨 Preparation
+A custom Jenkins container was created with all required dependencies pre-installed, including:
+- Docker CLI for building and running images
+- Python, pip, and venv for managing virtual environments
+
+###🔁 Pipelines
+🔄 Development Branch
+- Install Python dependencies
+- Run automated tests
+- Send email notifications for every build, regardless of success or failure
+
+🚀 Main Branch
+- Build a Docker image, tagged using the latest commit hash
+- Push the image to a Docker registry
+- Deploy the application using docker run from the built image
+
+This project provides hands-on experience with:
+- Jenkins pipeline-as-code
+- CI/CD best practices for Python apps
+- Docker-based deployment automation
