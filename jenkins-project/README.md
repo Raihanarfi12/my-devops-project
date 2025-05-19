@@ -3,6 +3,7 @@
 This Jenkins project automates the build and deployment process of a Python application hosted on GitHub. The repository used is:  
 👉 [https://github.com/Raihanarfi12/jenkins-repo](https://github.com/Raihanarfi12/jenkins-repo)
 
+![Architecture](jenkins-architecture.png)
 ---
 
 ## 🔧 Features
