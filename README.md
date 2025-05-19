@@ -30,12 +30,12 @@ Component :
 ###🔧 Description
 This project demonstrates a complete CI/CD pipeline setup using Jenkins for a Python application, highlighting automation in testing, Docker image creation, and deployment workflows.
 
-###🔨 Preparation
+### 🔨 Preparation
 A custom Jenkins container was created with all required dependencies pre-installed, including:
 - Docker CLI for building and running images
 - Python, pip, and venv for managing virtual environments
 
-###🔁 Pipelines
+### 🔁 Pipelines
 🔄 Development Branch
 - Install Python dependencies
 - Run automated tests
